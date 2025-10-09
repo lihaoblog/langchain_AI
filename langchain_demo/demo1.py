@@ -45,11 +45,11 @@ llm=ChatOpenAI(
 # )
 
 # 下命令,可以用字典或者二元祖
-message=[('system','你是一个智能助手'),
-         ('human','介绍一下什么是深度学习')
-         ]
-
-#传入命令
-answer=llm.invoke(message)
-
-print(answer)
+# message=[('system','你是一个智能助手'),
+#          ('human','介绍一下什么是深度学习')
+#          ]
+#
+# #传入命令
+# answer=llm.invoke(message)
+#
+# print(answer)
