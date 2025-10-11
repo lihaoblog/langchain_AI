@@ -1,3 +1,5 @@
+#with_structured_output输出格式,一般要定义一个类来继承pydantic,
+
 from typing import Optional
 import json
 

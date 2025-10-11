@@ -1,3 +1,5 @@
+# 工具调用，智能体开发用，用bind_tools绑定类给的结构化，这个类默认with_structured_output输出结构格式的那种
+
 from pydantic import BaseModel, Field
 
 from langchain_demo.demo1 import llm

@@ -1,3 +1,5 @@
+# SimpleJsonOutputParser需要一个提示词模板做说明，不需要类（deepseek只支持这种）
+
 from langchain_core.output_parsers import SimpleJsonOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -14,6 +16,7 @@ prompt=ChatPromptTemplate.from_template(
 # runnable=llm.with_sructured_output()
 
 # 传给json解释器输出格式,在python中json输出就是字典格式
+# 这个管道符就是LECL
 chain=prompt | llm | SimpleJsonOutputParser()
 
 
