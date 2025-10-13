@@ -42,5 +42,12 @@ chain_with_chat_message_history=RunnableWithMessageHistory(
     history_messages_key='chat_history'  #这个值要和基础模板的值一样，届时需要检索这个字段
 )
 
-res=chain_with_chat_message_history.invoke({"input":"你好，我是李浩"},config={"configurable":{"session_id","ques1"}})
-res=chain_with_chat_message_history.invoke({"input":"我是谁"},config={"configurable":{"session_id","ques1"}})
+res=chain_with_chat_message_history.invoke({"input":"你好，我是李浩"},
+                                           config={"configurable":{"session_id":"ques1"}})
+res1=chain_with_chat_message_history.invoke({"input":"我是谁"},
+                                           config={"configurable":{"session_id":"ques1"}})
+res2=chain_with_chat_message_history.invoke({"input":"我是谁"},
+                                           config={"configurable":{"session_id":"ques2"}})
+print(res)
+print(res1)
+print(res2)

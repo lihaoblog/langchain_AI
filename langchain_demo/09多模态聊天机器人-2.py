@@ -4,7 +4,6 @@ from langchain_community.chat_message_histories import SQLChatMessageHistory
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables import RunnableWithMessageHistory
-
 from langchain_demo.demo1 import llm
 
 # from_messages是列表里面放多个元祖 ,以下三部分组成
@@ -29,10 +28,9 @@ def get_session_his(session_id:str):
     """从数据库中的历史消息中返回当前id所有历史消息"""
     return SQLChatMessageHistory(
         session_id=session_id,
-        connect_string="oracle+cx_oracle://scott:tiger@127.0.0.1:1521/orcl"
+        connection_string="oracle+oracledb://lihao:201314lh@127.0.0.1:1521/orcl"
+
     )
-
-
 
 # 3.创建带历史记录功能的处理链
 chain_with_chat_message_history=RunnableWithMessageHistory(
@@ -42,5 +40,12 @@ chain_with_chat_message_history=RunnableWithMessageHistory(
     history_messages_key='chat_history'  #这个值要和基础模板的值一样，届时需要检索这个字段
 )
 
-res=chain_with_chat_message_history.invoke({"input":"你好，我是李浩"},config={"configurable":{"session_id","ques1"}})
-res=chain_with_chat_message_history.invoke({"input":"我是谁"},config={"configurable":{"session_id","ques1"}})
+res=chain_with_chat_message_history.invoke({"input":"你好，我是李浩"},
+                                           config={"configurable":{"session_id":"ques1"}})
+res1=chain_with_chat_message_history.invoke({"input":"我是谁"},
+                                           config={"configurable":{"session_id":"ques1"}})
+res2=chain_with_chat_message_history.invoke({"input":"我是谁"},
+                                           config={"configurable":{"session_id":"ques2"}})
+print(res)
+print(res1)
+print(res2)
