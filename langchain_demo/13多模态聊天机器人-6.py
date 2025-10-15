@@ -1,4 +1,4 @@
-# 用python的gradio来生成web界面
+# 实现音频输入返回功能
 from langchain_community.chat_message_histories import SQLChatMessageHistory
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
@@ -102,6 +102,9 @@ def execute_chain(chat_history):
     chat_history.append({'role':'assistant','content':result.content})
     return chat_history
 
+# 实现音频处理
+def read_audio(chat_history,audio_message):
+    print(audio_message)
 
 # 开发web界面
 with gr.Blocks(title="多模态聊天机器人",theme=gr.themes.Soft()) as block:   #开发一个空白页
@@ -116,9 +119,12 @@ with gr.Blocks(title="多模态聊天机器人",theme=gr.themes.Soft()) as block
         with gr.Column(scale=1):
             # 写一个按钮加语音输入
             audio_input=gr.Audio(sources=['microphone'],label='语音输入',type='filepath',format='wav')
-    #回车发送提交功能
+    #回车发送提交文字功能
     chat_message=user_input.submit(add_message,[chatbot,user_input],[chatbot,user_input])
     chat_message.then(execute_chain,chatbot,chatbot)
+
+    #语音输入框功能
+    audio_input.change(read_audio,[audio_input],[user_input])
 
 
 res=final_chain.invoke({"input":"你好，我是李浩","config":{"configurable":{"session_id":"ques1"}}},
