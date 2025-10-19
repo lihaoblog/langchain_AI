@@ -21,7 +21,7 @@ llm=ChatOpenAI(
     temperature = 0.7,
     api_key='xx',
     base_url=LOCAL_BASE_URL,
-    extra_body={'chat_template_kwargs':{'enable_thing':True}},
+    extra_body={'chat_template_kwargs':{'enable_thing':False}},
 )
 
 
